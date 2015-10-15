@@ -1,0 +1,47 @@
+
+
+<div class="row ">
+  <div class="col-sm-12" >
+        <ui-select ng-model="actor.selected"
+                   on-select="refreshMovies($item, $model)"
+                   style="width: 300px;">
+          <ui-select-match placeholder="Search an actor...">{{$select.selected.name}}</ui-select-match>
+          <ui-select-choices repeat="actor in actorList"
+                   refresh="refreshActors($select.search)"
+                   refresh-delay="500">
+              <img ng-src="{{actor.profile_path}}" ng-show="actor.profile_path" />
+              <span ng-bind-html="actor.name | highlight: $select.search"></span>
+          </ui-select-choices>
+        </ui-select>
+        <br />
+        <br />
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+      <h2 ng-show="actor.selected">{{actor.selected.name}}'s movies:</h2>
+  </div>
+
+  <div ng-repeat="movie in movies" class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-4">
+              <img ng-src="{{ movie.poster_path }}" class="img-responsive" />
+            </div>
+            <div class="col-sm-8">
+              <h3>{{ movie.title }}s</h3>
+              <dl>
+                <dt>Character</dt>
+                <dd>{{ movie.character }}</dd>
+
+                <dt>Release date</dt>
+                <dd>{{ movie.release_date }}</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

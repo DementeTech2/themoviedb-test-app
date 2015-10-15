@@ -1,0 +1,12 @@
+{
+  "name": "tmdapitest",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "^1.3.0",
+    "bootstrap": "3.3.4",
+    "ui-select": "angular-ui-select#~0.13.2",
+    "angular-sanitize": "~1.4.7"
+  },
+  "appPath": "app",
+  "moduleName": "tmdapitestApp"
+}
