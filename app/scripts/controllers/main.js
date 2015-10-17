@@ -8,9 +8,9 @@
  * Controller of the tmdapitestApp
  */
 angular.module('tmdapitestApp')
-  .controller('MainCtrl', function ( $scope, $http, $mdDialog, $mdSidenav, MoviesService ) {
+  .controller('MainCtrl', function ( $scope, $http, $mdDialog, $mdSidenav, $routeParams, $location, MoviesService ) {
 
-      $scope.actor = { selected:undefined };
+      $scope.actor = { selected2:undefined ,selected:undefined };
       $scope.actorExtended = undefined;
       $scope.actorList = [];
       $scope.movies = [];
@@ -18,6 +18,13 @@ angular.module('tmdapitestApp')
       $scope.loadingActor = false;
       $scope.openSide = false;
 
+      $scope.openActor = function (actor) {
+      	if ( actor ) {
+      		setTimeout(function () {
+      			$location.path('/'+actor.id+'/'+actor.name);
+      		}, 100);
+      	}
+      };
 
 	  $scope.refreshActors = function(query) {
 	  	$scope.actorList = [];
@@ -40,9 +47,9 @@ angular.module('tmdapitestApp')
 
 	  $scope.refreshActorInfo = function() {
 	  	$scope.actorExtended = undefined;
-	  	if ($scope.actor.selected) {
+	  	if ($scope.actor.selected2) {
 	  		$scope.loadingActor = true;
-		    return MoviesService.getActorInfo($scope.actor.selected.id).then(function(response) {
+		    return MoviesService.getActorInfo($scope.actor.selected2.id).then(function(response) {
 	    		$scope.loadingActor = false;
 		      	$scope.actorExtended = response.data.results;
 		    });
@@ -50,11 +57,10 @@ angular.module('tmdapitestApp')
 	  };
 
 	  $scope.refreshMovies = function() {
-	  	$scope.refreshActorInfo();
 	  	$scope.movies = [];
-	  	if ($scope.actor.selected) {
+	  	if ($scope.actor.selected2) {
 	  		$scope.loadingMovies = true;
-		    return MoviesService.getMovies($scope.actor.selected.id).then(function(response) {
+		    return MoviesService.getMovies($scope.actor.selected2.id).then(function(response) {
 	    		$scope.loadingMovies = false;
 		      	$scope.movies = response.data.results;
 		    });
@@ -68,13 +74,12 @@ angular.module('tmdapitestApp')
 	      parent: angular.element(document.body),
 	      targetEvent: ev,
 	      clickOutsideToClose:true,
-	      locals:{ movieSelected: mv, actorSelected:$scope.actor.selected },
+	      locals:{ movieSelected: mv, actorSelected:$scope.actor.selected2 },
 	      bindToController : true
 	    })
 	    .then(function(actor) {
 	    	if ( actor ) {
-		    	$scope.actor.selected = actor;
-		    	$scope.refreshMovies();
+		    	$scope.openActor(actor);
 		    }
 	    });
 	  };
@@ -82,4 +87,25 @@ angular.module('tmdapitestApp')
 	  $scope.toggleActorSidebar = function () {
 	  	$scope.openSide = !$scope.openSide;
 	  };
+
+
+	  $scope.getMovieImage = function (path) {
+	  	if ( path ) {
+	  		return 'http://image.tmdb.org/t/p/w185' + path;
+	  	} else{
+	  		return 'http://dummyimage.com/185x278/555/fff.png&text=No+image';
+	  	}
+
+	  };
+
+
+      if ( $routeParams.id ) {
+      	$scope.actor.selected2 = {
+      		id: $routeParams.id,
+      		name: $routeParams.name
+      	};
+      	 $scope.actor.selected = $scope.actor.selected2;
+      	 $scope.refreshMovies();
+      	 $scope.refreshActorInfo();
+      }
   });

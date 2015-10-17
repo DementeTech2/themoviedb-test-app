@@ -23,7 +23,7 @@
 
     <!-- Add your site or application content here -->
 
-    <div ng-include="'views/main.html'" ng-controller="MainCtrl as ctrl"></div>
+    <ng-view></ng-view>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -34,6 +34,7 @@
     <script src="bower_components/angular-material/angular-material.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-carousel/dist/angular-carousel.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

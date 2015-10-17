@@ -31,7 +31,7 @@
 				    	</div>
 			        </md-content>
 			      </md-tab>
-			      <md-tab label="Images" ng-if="hasImages()">
+			      <md-tab label="Images" ng-disabled="!hasImages()">
 			        <md-content class="md-padding">
 			          	<ul rn-carousel rn-carousel-controls class="imageCarousel">
 						  <li ng-repeat="image in movieImages">
@@ -42,15 +42,18 @@
 						</ul>
 			        </md-content>
 			      </md-tab>
-			      <md-tab label="Trailer" ng-if="hasVideo()">
+			      <md-tab label="Trailer" ng-disabled="!hasVideo()">
 			        <md-content class="md-padding">
 		          		<iframe style="margin:0 auto;display: block;"  width="420" height="315" ng-src="{{ getIframeSrc( movieTrailer.key ) }}"></iframe>
 			        </md-content>
 			      </md-tab>
-			      <md-tab label="Cast" ng-if="movieExtended">
+			      <md-tab label="Cast" ng-disabled="!exdended">
 			        <md-content class="md-padding">
-			        <md-list ng-cloak>
-			            <md-list-item ng-repeat="actor in movieExtended.credits.cast">
+			        <div layout="row" layout-sm="column" layout-align="space-around" ng-show="!exdended">
+			          <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+			        </div>
+			        <md-list>
+			            <md-list-item ng-repeat="actor in movieExtended.credits.cast" ng-class="{'warn': actor.id == actorSelected.id }">
 						    <img alt="{{ actor.name }}" ng-src="http://image.tmdb.org/t/p/w45{{ actor.profile_path }}" class="md-avatar" ng-show="actor.profile_path" />
 						    <img alt="{{ actor.name }}" ng-src="http://dummyimage.com/40x40/555/fff.png&text={{ actor.name | limitTo:1 }}" class="md-avatar" ng-hide="actor.profile_path" />
 						    <p><strong>{{ actor.character }}</strong> by {{ actor.name }}</p>
