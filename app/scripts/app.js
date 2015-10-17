@@ -9,4 +9,4 @@
  * Main module of the application.
  */
 angular
-  .module('tmdapitestApp', ['ui.select', 'ngSanitize', 'config']);
+  .module('tmdapitestApp', ['ngMaterial', 'ngSanitize', 'config', 'angular-carousel']);

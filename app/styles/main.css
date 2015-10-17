@@ -1,83 +1,102 @@
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+.actorsListDropDown li {
+  padding: 10px;
+}
+.actorsListDropDown li img {
+  float:left;
+  margin-right: 10px;
+  height: 100%;
 }
 
-body {
-  padding: 0;
-}
-
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
-}
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
-}
-
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
-}
-
-.container-narrow > hr {
-  margin: 30px 0;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
+.movie-tile .year {
+  position: absolute;
+  top: 10px;
+  right: 26px;
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  color: #fff;
   text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
-}
-
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+  background: #f0ad4e;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
+.movie-tile {
+  cursor: pointer;
+}
 
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
+
+.movie-tile img {
+  max-width: 100%;
+  height: 100%;
+}
+
+.movie-tile md-grid-tile-footer {
+  background-color: #000;
+}
+
+md-grid-list {
+  margin-bottom: 70px;
+}
+
+.movieDiv {
+  width: 80%;
+}
+
+@media only screen and (min-width:960px) {
+  .movieDiv {
+    width: 66%;
   }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
+}
+
+.movieDiv .movie-main-post {
+  width: 30%;
+  float: left;
+  margin-right: 20px;
+}
+
+.movieDiv md-tab-item:not([disabled]).md-active {
+  color:#333;
+}
+
+.movieDiv .imageCarousel {
+  height: 480px;
+}
+
+.md-sidenav-left .imageCarousel {
+  height: 400px;
+}
+
+.md-sidenav-left .rn-carousel-control{
+  background-color: #fff;
+}
+
+
+.imageCarousel .layer {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.imageCarousel .layer img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px; height: 0; overflow: hidden;
+}
+ 
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }

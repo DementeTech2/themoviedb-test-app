@@ -12,12 +12,7 @@ if ( isset($_GET['actor']) && !empty($_GET['actor']) ) {
 	try {
 		$result = $client->getPeopleApi()->getMovieCredits($id);
 		$result = $result['cast'];
-	
-		foreach ($result as &$res) {
-			if ( !empty( $res['poster_path'] ) )
-				$res['poster_path'] = MOVIE_URL_PATH .$res['poster_path'];
-		}
-
+		
 		usort($result, function($a, $b) {
 			if ( $a['release_date'] == null && $b['release_date'] == null ) return 0;
 			if ( $a['release_date'] == null ) return 1;

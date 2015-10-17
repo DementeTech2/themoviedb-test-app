@@ -2,15 +2,20 @@
 
 include_once __DIR__.'/config.php';
 
-use Tmdb\Exception\TmdbApiException;
-
-if ( isset($_GET['actor']) && !empty($_GET['actor']) ) {
-	$id = (int)($_GET['actor']);
+if ( isset($_GET['q']) || !empty($_GET['q']) ) {
+	$query = strip_tags($_GET['q']);
 	$token  = new \Tmdb\ApiToken(API_KEY);
 	$client = new \Tmdb\Client($token);
 
 	try {
-		$result = $client->getPeopleApi()->getPerson($id, ['append_to_response'=>'credits,videos,images','language'=>'en']);
+		$result = $client->getSearchApi()->searchPersons($query);
+
+		$result = array_slice($result['results'],0,5);
+
+		foreach ($result as &$res) {
+			unset($res['known_for']);
+		}
+
 		$result = array(
 			'success' => true,
 			'results' => $result
@@ -20,7 +25,7 @@ if ( isset($_GET['actor']) && !empty($_GET['actor']) ) {
 	        // not found
 	        $result = array(
 				'success' => false,
-				'error' => "The Person does not exist"
+				'error' => "No results"
 			);
 	    }
 	} catch (Exception $e) {
