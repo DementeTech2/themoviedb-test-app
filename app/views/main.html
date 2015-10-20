@@ -66,8 +66,8 @@
               md-row-height="3:4" md-gutter="8px" md-gutter-gt-sm="4px"  >
           <md-grid-tile ng-repeat="movie in movies" class="movie-tile"  ng-click="openMovie($event, movie)">
             <div class="inner" ng-style="{'background-image': 'url({{ getMovieImage(movie.poster_path) }})' }">
-              <span class="year" ng-hide="movie.release_date">Not release date</span>
-              <span class="year" ng-show="movie.release_date">{{ movie.release_date| limitTo: 4 }}</span>
+              <span class="year" ng-if="!movie.release_date">Not release date</span>
+              <span class="year" ng-if="movie.release_date">{{ movie.release_date| limitTo: 4 }}</span>
             </div>
             <md-grid-tile-footer><h3>{{movie.title}}</h3></md-grid-tile-footer>
           </md-grid-tile>

@@ -8,7 +8,7 @@
  * Controller of the tmdapitestApp
  */
 angular.module('tmdapitestApp')
-  .controller('MainCtrl', function ( $scope, $http, $mdDialog, $mdSidenav, $routeParams, $location, MoviesService ) {
+  .controller('MainCtrl', function (  $window, $rootScope, $scope, $http, $mdDialog, $mdSidenav, $routeParams, $location, MoviesService ) {
 
       $scope.actor = { selected2:undefined ,selected:undefined };
       $scope.actorExtended = undefined;
@@ -17,6 +17,10 @@ angular.module('tmdapitestApp')
       $scope.loadingMovies = false;
       $scope.loadingActor = false;
       $scope.openSide = false;
+
+      $rootScope.$on('$routeChangeSuccess', function(event) {
+	    $window.ga('send', 'pageview', { page: $location.url() });
+	  });
 
       $scope.openActor = function (actor) {
       	if ( actor ) {
