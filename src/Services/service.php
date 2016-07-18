@@ -127,7 +127,17 @@ class Service
 
 			if ( count($params) >= count($parameters) ) {
 				try {
-					return $this->cacheOrCall($method, $params);
+					$result = $this->cacheOrCall($method, $params);
+
+					if ( empty($result)) {
+						return [
+							'success' => false,
+							'error' => "The server is not responding, please try later"
+						];
+					} else {
+						return $this->cacheOrCall($method, $params);
+					}
+
 				} catch (TmdbApiException $e) {
 				    if (TmdbApiException::STATUS_RESOURCE_NOT_FOUND == $e->getCode()) {
 				        // not found
