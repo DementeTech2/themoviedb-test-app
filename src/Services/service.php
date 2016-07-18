@@ -16,6 +16,8 @@ class Service
 	protected $response;
 	protected $client;
 	protected $cache;
+
+	protected $skipCacheFor = ['search_actor'];
 	
 	function __construct()
 	{
@@ -149,6 +151,10 @@ class Service
 
 	private function cacheOrCall($method, $params)
 	{
+		if ( in_array($method,  $this->skipCacheFor)) {
+			 return call_user_func_array([$this, $method], $params);			
+		}
+
 		$filename = md5(implode("-", array_merge([$method], $params)));
 
 		if($this->cache->valid($filename)) {
