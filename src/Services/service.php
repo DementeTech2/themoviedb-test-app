@@ -6,6 +6,7 @@ use Tmdb\Exception\TmdbApiException;
 use Tmdb\ApiToken;
 use Tmdb\Client;
 use \ReflectionMethod;
+use App\Services\Cache;
 
 /**
 * Main service handler
@@ -14,11 +15,13 @@ class Service
 {
 	protected $response;
 	protected $client;
+	protected $cache;
 	
 	function __construct()
 	{
 		$token  = new ApiToken(API_KEY);
 		$this->client = new Client($token);
+		$this->cache = new Cache(CACHE_PATH, CACHE_TIME);
 	}
 
 
@@ -122,7 +125,7 @@ class Service
 
 			if ( count($params) >= count($parameters) ) {
 				try {
-					return call_user_func_array([$this, $method], $params);
+					return $this->cacheOrCall($method, $params);
 				} catch (TmdbApiException $e) {
 				    if (TmdbApiException::STATUS_RESOURCE_NOT_FOUND == $e->getCode()) {
 				        // not found
@@ -142,6 +145,20 @@ class Service
 		} else {
 			return false;
 		}
+	}
+
+	private function cacheOrCall($method, $params)
+	{
+		$filename = md5(implode("-", array_merge([$method], $params)));
+
+		if($this->cache->valid($filename)) {
+			return $this->cache->read($filename);
+		}
+
+		$result = call_user_func_array([$this, $method], $params);
+		$this->cache->save($filename, $result);
+
+		return $result;
 	}
 
 
