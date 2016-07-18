@@ -2,6 +2,8 @@
 
 include_once __DIR__.'/config.php';
 
+use Tmdb\Exception\TmdbApiException;
+
 if ( isset($_GET['q']) || !empty($_GET['q']) ) {
 	$query = strip_tags($_GET['q']);
 	$token  = new \Tmdb\ApiToken(API_KEY);

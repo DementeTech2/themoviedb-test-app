@@ -11,42 +11,34 @@ angular.module('moviestest2App')
   .service('MoviesService', function ($http, $location) {
 
   	var API = {
-  		url: $location.protocol() + '://'+ $location.host()
+  		url: $location.protocol() + '://'+ $location.host() + "/api"
   	};
 
     function _getActorInfo(actorid) {
-	    var params = {actor: actorid};
-	    var url = API.url + '/actor.php';
+	    var url = API.url + '/actor/'+actorid;
 	    return $http.get(
-	      url,
-	      {params: params}
+	      url
 	    );
 	  }
 
     function _searchActors(search) {
-	    var params = {q: search};
-	    var url = API.url + '/searchActor.php';
+	    var url = API.url + '/search_actor/'+search;
 	    return $http.get(
-	      url,
-	      {params: params}
+	      url
 	    );
 	  }
 
     function _getMovieInfo(movieid) {
-	    var params = {movie: movieid};
-	    var url = API.url + '/movie.php';
+	    var url = API.url + '/movie/'+movieid;
 	    return $http.get(
-	      url,
-	      {params: params}
+	      url
 	    );
 	  }
 
 	function _getMovies(actorid) {
-	    var params = {actor: actorid};
-	    var url = API.url + '/movies.php';
+	    var url = API.url + '/actor_movies/'+actorid;
 	    return $http.get(
-	      url,
-	      {params: params}
+	      url
 	    );
 	  }
 
