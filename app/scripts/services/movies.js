@@ -2,13 +2,17 @@
 
 /**
  * @ngdoc service
- * @name tmdapitestApp.movies
+ * @name moviestest2App.movies
  * @description
  * # movies
- * Service in the tmdapitestApp.
+ * Service in the moviestest2App.
  */
-angular.module('tmdapitestApp')
-  .service('MoviesService', function ($http, API) {
+angular.module('moviestest2App')
+  .service('MoviesService', function ($http, $location) {
+
+  	var API = {
+  		url: $location.protocol() + '://'+ $location.host()
+  	};
 
     function _getActorInfo(actorid) {
 	    var params = {actor: actorid};

@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name tmdapitestApp
+ * @name moviestest2App
  * @description
- * # tmdapitestApp
+ * # moviestest2App
  *
  * Main module of the application.
  */
 angular
-  .module('tmdapitestApp', ['ngMaterial', 'ngSanitize', 'config', 'angular-carousel','ngRoute']).config(function ($routeProvider) {
+  .module('moviestest2App', ['ngMaterial', 'ngSanitize', 'angular-carousel','ngRoute']).config(function ($routeProvider) {
     $routeProvider
       .when('/:id/:name', {
         templateUrl: 'views/main.html',

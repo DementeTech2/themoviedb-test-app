@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name tmdapitestApp.controller:MovieCtrl
+ * @name moviestest2App.controller:MovieCtrl
  * @description
  * # MovieCtrl
- * Controller of the tmdapitestApp
+ * Controller of the moviestest2App
  */
-angular.module('tmdapitestApp')
+angular.module('moviestest2App')
   .controller('MovieCtrl', function ($scope, $mdDialog, $sce, MoviesService, movieSelected, actorSelected ) {
 
   	$scope.movieSelected = movieSelected;

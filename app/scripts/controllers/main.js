@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name tmdapitestApp.controller:MainCtrl
+ * @name moviestest2App.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the tmdapitestApp
+ * Controller of the moviestest2App
  */
-angular.module('tmdapitestApp')
-  .controller('MainCtrl', function (  $window, $rootScope, $scope, $http, $mdDialog, $mdSidenav, $routeParams, $location, MoviesService ) {
+angular.module('moviestest2App')
+.controller('MainCtrl', function (  $window, $rootScope, $scope, $http, $mdDialog, $mdSidenav, $routeParams, $location, MoviesService ) {
 
       $scope.actor = { selected2:undefined ,selected:undefined };
       $scope.actorExtended = undefined;
@@ -18,7 +18,7 @@ angular.module('tmdapitestApp')
       $scope.loadingActor = false;
       $scope.openSide = false;
 
-      $rootScope.$on('$routeChangeSuccess', function(event) {
+      $rootScope.$on('$routeChangeSuccess', function() {
 	    $window.ga('send', 'pageview', { page: $location.url() });
 	  });
 
